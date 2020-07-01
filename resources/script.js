@@ -123,10 +123,10 @@ document.getElementById("callStop").addEventListener("click",function(){
 */
 document.getElementById("connect-to-peer-btn").addEventListener("click", function(){
     username = document.getElementById("name").value;
-    peer_id = document.getElementById("peerid").value;
+    peerid = document.getElementById("peerid").value;
     
-    if(peer_id && username ) {
-        conn = peer.connect(peer_id, {
+    if(peerid && username ) {
+        conn = peer.connect(peerid, {
             metadata: {
                 'username':username
             }
@@ -163,9 +163,9 @@ document.getElementById("connect-to-peer-btn").addEventListener("click", functio
 
 document.getElementById("call-to-peer-btn").addEventListener("click", function(){
     username = document.getElementById("name").value;
-    peer_id = document.getElementById("peerid").value;
+    peerid = document.getElementById("peerid").value;
     
-    if(peer_id && username ) {
+    if(peerid && username ) {
         requestLocalVideo({
             success: function(stream) {
                 window.localStream = stream;
@@ -177,7 +177,7 @@ document.getElementById("call-to-peer-btn").addEventListener("click", function()
             }
         });
     
-        conn = peer.call(peer_id, window.localStream, {
+        conn = peer.call(peerid, window.localStream, {
             metadata: {
                 'username':username
             }
