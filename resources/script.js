@@ -190,6 +190,11 @@ document.getElementById("call-to-peer-btn").addEventListener("click", function()
                 'username':username
             }
         });
+        conn.on('stream', function(stream){
+            window.peer_stream = stream;
+            onReceiveStream(stream,'peer-camera');
+        });
+
     } else {
         swal({
             title:"Details needed!",
