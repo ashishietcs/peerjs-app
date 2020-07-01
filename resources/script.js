@@ -36,6 +36,16 @@ peer.on('call', function(call){
         buttons:true,
     }).then((isConfirm) => {
         if(isConfirm) {
+            requestLocalVideo({
+                success: function(stream) {
+                    window.localStream = stream;
+                    onReceiveStream(stream,'my-camera');
+                },
+                error:function(err){
+                    alert("Can not get access to your camera and video!");
+                    console.log(err);
+                }
+            });
             call.answer(window.localStream);
             call.on('stream', function(stream){
                 window.peer_stream = stream;
