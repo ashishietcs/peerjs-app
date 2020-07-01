@@ -32,12 +32,8 @@ peer.on('call', function(call){
     swal({
         title:"Incoming call!",
         text:"Videocall incoming, accept it?",
-        type:"success",
-        showCancelButton:true,
-        confirmButtonText:"yes",
-        cancelButtonText:"no",
-        closeOnConfirm:false,
-        closeOnCancel:false
+        icon:"success",
+        buttons:true,
     }),
     function(isConfirm) {
         if(isConfirm) {
