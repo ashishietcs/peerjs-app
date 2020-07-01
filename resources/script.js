@@ -34,8 +34,7 @@ peer.on('call', function(call){
         text:"Videocall incoming, accept it?",
         icon:"success",
         buttons:true,
-    }),
-    function(isConfirm) {
+    }).then((isConfirm) => {
         if(isConfirm) {
             call.answer(window.localStream);
             call.on('stream', function(stream){
@@ -48,7 +47,7 @@ peer.on('call', function(call){
         }  else {
             console.log("Call ended!");
         }
-    }
+    });
 });
 
 function requestLocalVideo(callbacks) {
