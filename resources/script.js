@@ -1,7 +1,8 @@
 var conn;
 var peer_id = "p"+Date.now();
 var call;
-
+var username;
+var remote_peer_id
 var peer = new Peer( peer_id, {
     secure: true,
       host: 'chat-module.herokuapp.com',
@@ -81,7 +82,6 @@ function onReceiveStream(stream, element_id) {
     video.onloadedmetadata = function(e) {
         video.play();
     }
-    window.peer_stream = stream;
 }
 
 
@@ -128,10 +128,10 @@ document.getElementById("callStop").addEventListener("click",function(){
 */
 document.getElementById("connect-to-peer-btn").addEventListener("click", function(){
     username = document.getElementById("name").value;
-    peerid = document.getElementById("peerid").value;
+    remote_peer_id = document.getElementById("peerid").value;
     
-    if(peerid && username ) {
-        conn = peer.connect(peerid, {
+    if(remote_peer_id && username ) {
+        conn = peer.connect(remote_peer_id, {
             metadata: {
                 'username':username
             }
@@ -152,17 +152,6 @@ document.getElementById("connect-to-peer-btn").addEventListener("click", functio
     //document.getElementById('chat').className = "";
     //document.getElementById("connection-form").className += " hidden";
     //document.getElementById("sidebar").className = "sidenav";
-
-    requestLocalVideo({
-        success: function(stream) {
-            window.localStream = stream;
-            onReceiveStream(stream,'my-camera');
-        },
-        error:function(err){
-            alert("Can not get access to your camera and video!");
-            console.log(err);
-        }
-    });
 },false);
 
 
@@ -181,9 +170,9 @@ document.getElementById("start-local-media-btn").addEventListener("click", funct
 
 document.getElementById("call-to-peer-btn").addEventListener("click", function(){
     username = document.getElementById("name").value;
-    peerid = document.getElementById("peerid").value;
+    remote_peer_id = document.getElementById("peerid").value;
     
-    if(peerid && username ) {
+    if(remote_peer_id && username ) {
         requestLocalVideo({
             success: function(stream) {
                 window.localStream = stream;
@@ -195,7 +184,7 @@ document.getElementById("call-to-peer-btn").addEventListener("click", function()
             }
         });
     
-        conn = peer.call(peerid, window.localStream, {
+        conn = peer.call(remote_peer_id, window.localStream, {
             metadata: {
                 'username':username
             }
