@@ -177,7 +177,7 @@ document.getElementById("call-to-peer-btn").addEventListener("click", function()
             }
         });
     
-        conn = peer.call(peer_id, window.mediaStream, {
+        conn = peer.call(peer_id, window.localStream, {
             metadata: {
                 'username':username
             }
