@@ -159,3 +159,35 @@ document.getElementById("connect-to-peer-btn").addEventListener("click", functio
         }
     });
 },false);
+
+
+document.getElementById("call-to-peer-btn").addEventListener("click", function(){
+    username = document.getElementById("name").value;
+    peer_id = document.getElementById("peerid").value;
+    
+    if(peer_id && username ) {
+        requestLocalVideo({
+            success: function(stream) {
+                window.localStream = stream;
+                onReceiveStream(stream,'my-camera');
+            },
+            error:function(err){
+                alert("Can not get access to your camera and video!");
+                console.log(err);
+            }
+        });
+    
+        conn = peer.call(peer_id, window.mediaStream, {
+            metadata: {
+                'username':username
+            }
+        });
+    } else {
+        swal({
+            title:"Details needed!",
+            text:"Please add valid details to start call",
+            icon:"error"
+        });
+        return false;
+    }
+},false);
