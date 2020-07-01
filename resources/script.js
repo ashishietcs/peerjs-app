@@ -1,7 +1,8 @@
 var conn;
-var peer_id;
+var peer_id = "p"+Date.now();
 var call;
-var peer = new Peer(  {
+
+var peer = new Peer( peer_id, {
     secure: true,
       host: 'chat-module.herokuapp.com',
     port: 443,
@@ -10,27 +11,6 @@ var peer = new Peer(  {
 document.addEventListener("DOMContentLoaded", function(event){
    
 },false);
-
-/*
-document.getElementById("callStop").addEventListener("click",function(){
-    document.getElementById('call').className = "btn btn-info";
-    document.getElementById('callStop').className = "btn btn-info hidden";
-    call.close();
-},false);
-
-document.getElementById("connect-to-peer-btn").addEventListener("click", function(){
-    username = document.getElementById("name").value;
-    peer_id = document.getElementById("peer_id").value;
-    
-    if(peer_id && username ) {
-        conn = peer.connect(peer_id, {
-            metadata: {
-                'username':username
-            }
-        })
-    }
-})
-*/
 
 peer.on('open', function() {
     document.getElementById("peer-id-txt").innerHTML = peer.id;
