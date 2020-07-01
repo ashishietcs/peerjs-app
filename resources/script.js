@@ -2,7 +2,8 @@ var conn;
 var peer_id = "p"+Date.now();
 var call;
 var username;
-var remote_peer_id
+var remote_peer_id;
+var local_stream;
 var peer = new Peer( peer_id, {
     secure: true,
       host: 'chat-module.herokuapp.com',
@@ -39,7 +40,7 @@ peer.on('call', function(call){
         if(isConfirm) {
             requestLocalVideo({
                 success: function(stream) {
-                    window.localStream = stream;
+                    local_stream = stream;
                     onReceiveStream(stream,'my-camera');
                 },
                 error:function(err){
@@ -47,7 +48,7 @@ peer.on('call', function(call){
                     console.log(err);
                 }
             });
-            call.answer(window.localStream);
+            call.answer(local_stream);
             call.on('stream', function(stream){
                 window.peer_stream = stream;
                 onReceiveStream(stream,'peer-camera');
@@ -158,8 +159,8 @@ document.getElementById("connect-to-peer-btn").addEventListener("click", functio
 document.getElementById("start-local-media-btn").addEventListener("click", function(){
     requestLocalVideo({
         success: function(stream) {
-                window.localStream = stream;
-                onReceiveStream(stream,'my-camera');
+            local_stream = stream;
+            onReceiveStream(stream,'my-camera');
         },
         error:function(err){
                 alert("Can not get access to your camera and video!");
@@ -175,7 +176,7 @@ document.getElementById("call-to-peer-btn").addEventListener("click", function()
     if(remote_peer_id && username ) {
         requestLocalVideo({
             success: function(stream) {
-                window.localStream = stream;
+                local_stream = stream;
                 onReceiveStream(stream,'my-camera');
             },
             error:function(err){
