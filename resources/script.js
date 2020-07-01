@@ -131,6 +131,10 @@ document.getElementById("connect-to-peer-btn").addEventListener("click", functio
                 'username':username
             }
         });
+        conn.on('open', function(){
+            console.log("connect to REMOTE opened", conn);
+            conn.send('hi!');
+          });
         conn.on('data', handleMessage);
     } else {
         swal({
@@ -154,5 +158,4 @@ document.getElementById("connect-to-peer-btn").addEventListener("click", functio
             console.log(err);
         }
     });
-    conn.send("Hi");
 },false);
