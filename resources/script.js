@@ -185,7 +185,7 @@ document.getElementById("call-to-peer-btn").addEventListener("click", function()
             }
         });
     
-        conn = peer.call(remote_peer_id, window.localStream, {
+        conn = peer.call(remote_peer_id, local_stream, {
             metadata: {
                 'username':username
             }
