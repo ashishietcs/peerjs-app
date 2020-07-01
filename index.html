@@ -1,0 +1,17 @@
+        <h1 class="text-center">
+            <small>Start call
+                <span id="peer-id-txt"></span>
+            </small>
+        </h1>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Login name">
+        <input type="text" class="form-control" name="peerid" id="peerid" placeholder="Peer ID">
+        <div class="peer-control">
+            <button id="connect-to-peer-btn" class="btn btn-primary">Connect</button>
+        </div>
+
+        <video id="peer-camera" width="400" height="400" autoplay="autoplay" class="center-block"></video>
+        <span class="label label-info" id="connected_peer"></span>
+        <video id="my-camera" width="150" height="150" autoplay="autoplay" muted="true" class="center-block"></video>
+        <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="resources/script.js"></script>

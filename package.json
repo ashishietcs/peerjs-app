@@ -1,0 +1,14 @@
+{
+  "name": "peerjs-app",
+  "version": "1.0.0",
+  "description": "This will many examples and application of peer 2 peer webrtc (peerjs). ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ashish Sahu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
