@@ -166,6 +166,19 @@ document.getElementById("connect-to-peer-btn").addEventListener("click", functio
 },false);
 
 
+document.getElementById("start-local-media-btn").addEventListener("click", function(){
+    requestLocalVideo({
+        success: function(stream) {
+                window.localStream = stream;
+                onReceiveStream(stream,'my-camera');
+        },
+        error:function(err){
+                alert("Can not get access to your camera and video!");
+                console.log(err);
+            }
+    });
+},false);
+
 document.getElementById("call-to-peer-btn").addEventListener("click", function(){
     username = document.getElementById("name").value;
     peerid = document.getElementById("peerid").value;
