@@ -1,3 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>   
+        
+        <style>
+            * {
+              box-sizing: border-box;
+            }
+            
+            /* Create two unequal columns that floats next to each other */
+            .column {
+              float: left;
+              padding: 10px;
+            }
+            
+            .left {
+              width: 80%;
+            }
+            
+            .right {
+              width: 20%;
+            }
+            
+            /* Clear floats after the columns */
+            .row:after {
+              content: "";
+              display: table;
+              clear: both;
+            }
+
+        .chatme {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.chatpeer {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container-chat {
+    justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
+  display: flex;
+}
+
+.container-chat .chat-input {
+    justify-content: flex-end;
+  display: flex;
+  margin: 10px 0;
+}
+.top-block{
+    justify-content: flex-left;
+  display: flex;
+  margin: 10px 0;
+}
+            </style>
+    </head>
+    <body>
+        <div class="container">
+ 
+        <div class="column left" style="background-color:rgb(133, 197, 240);">
         <h1 class="text-center">
             <small>Start call
                 <span id="peer-id-txt"></span>
@@ -10,10 +81,27 @@
             <button id="connect-to-peer-btn" class="btn btn-primary">Connect</button>
             <button id="call-to-peer-btn" class="btn btn-primary">Call</button>
         </div>
+        <div class=center-block>
+            <video id="my-camera" width="150" height="150" autoplay="autoplay" muted="true" class="top-block"></video>
+            <span class="label label-info" id="connected_peer"></span>
+            <video id="peer-camera" width="400" height="400" autoplay="autoplay" class="center-block"></video>
+        </div>
+  </div>
+  <div class="column right" style="background-color:rgb(233, 218, 227);">
+  <div class="container-chat">
+    <div id="msgs">
+    </div>
+    <div class="chat-input">
+        <input type="text" name="msg" id="send-msg" placeholder="Enter message here"></input>
+        <button id="send-message" class="btn btn-primary">Send</button>
+    </div>
 
-        <video id="peer-camera" width="400" height="400" autoplay="autoplay" class="center-block"></video>
-        <span class="label label-info" id="connected_peer"></span>
-        <video id="my-camera" width="150" height="150" autoplay="autoplay" muted="true" class="center-block"></video>
-        <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="resources/script.js"></script>
+  </div>
+  </div>
+  <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="resources/script.js"></script>
+
+    </div>
+
+    </body>
