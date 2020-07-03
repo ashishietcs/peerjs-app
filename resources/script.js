@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 document.getElementById("start-local-media-btn").disabled = true;
                 document.getElementById("call-to-peer-btn").disabled = true;
                 document.getElementById("hangup-call-btn").disabled = false;
+                document.getElementById("mute-call-btn").disabled= false;
+
    
                 call.on('stream', function (stream) {
                     window.peer_stream = stream;
