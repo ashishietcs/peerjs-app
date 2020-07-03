@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
     var conn;
-    var peer_id = "p" + Date.now();
+    var peer_id = "p" + (Date.now()>>8);
     var peer_call;
     var username = peer_id;
     var remote_peer_id;
