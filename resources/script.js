@@ -3,10 +3,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     var conn;
     var peer_id = "p" + Date.now();
-    var call;
+    var peer_call;
     var username = peer_id;
     var remote_peer_id;
     var local_stream;
+    var audio_enabled = true;
     var peer = new Peer(peer_id, {
         secure: true,
         host: 'chat-module.herokuapp.com',
@@ -48,12 +49,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         console.log(err);
                     }
                 });
+                peer_call = call;
                 call.answer(local_stream);
+                document.getElementById("start-local-media-btn").disabled = true;
+                document.getElementById("call-to-peer-btn").disabled = true;
+                document.getElementById("hangup-call-btn").disabled = false;
+   
                 call.on('stream', function (stream) {
                     window.peer_stream = stream;
                     onReceiveStream(stream, 'peer-camera');
                 });
                 call.on('clsoe', function () {
+                    closeCall();
                     alert("The video call has finished");
                 });
             } else {
@@ -68,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             navigator.mozGetUserMedia;
 
         if (navigator.getUserMedia) {
-            navigator.getUserMedia({ audio: false, video: true },
+            navigator.getUserMedia({ audio: true, video: true },
                 callbacks.success, callbacks.error
             );
         } else {
@@ -170,6 +177,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 console.log(err);
             }
         });
+        document.getElementById("start-local-media-btn").disabled = true;
+        document.getElementById("call-to-peer-btn").disabled = false;
     }, false);
 
     document.getElementById("call-to-peer-btn").addEventListener("click", function () {
@@ -189,15 +198,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 }
             });
 
-            conn = peer.call(remote_peer_id, local_stream, {
+            peer_call = peer.call(remote_peer_id, local_stream, {
                 metadata: {
                     'username': username
                 }
             });
-            conn.on('stream', function (stream) {
+            peer_call.on('stream', function (stream) {
                 window.peer_stream = stream;
                 onReceiveStream(stream, 'peer-camera');
             });
+            peer_call.on("close", function() {
+                closeCall();
+            });
+            document.getElementById("mute-call-btn").disabled= false;
+            document.getElementById("hangup-call-btn").disabled = false;
+            document.getElementById("call-to-peer-btn").disabled = true;
 
         } else {
             swal({
@@ -222,5 +237,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
 
     }, false);
+
+    document.getElementById("hangup-call-btn").addEventListener("click", function () {
+        closeCall();
+    }, false);
+
+    function closeCall() {
+        peer_call.close();
+        peer_call = null;
+        document.getElementById("mute-call-btn").disabled= true;
+        document.getElementById("hangup-call-btn").disabled = true;
+        document.getElementById("call-to-peer-btn").disabled = true;
+        document.getElementById("start-local-media-btn").disabled = false;
+    }
+    document.getElementById("mute-call-btn").addEventListener("click", function () {
+        audio_enabled = !audio_enabled;
+        local_stream.getAudioTracks()[0].enabled = audio_enabled;
+        if (audio_enabled )
+            document.getElementById("mute-call-btn").innerHTML= "Mute";
+        else 
+            document.getElementById("mute-call-btn").innerHTML = "UnMute";
+}, false);
+
+
+
 
 }, false);
