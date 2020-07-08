@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Create two unequal columns that floats next to each other */
+  .column {
+    float: left;
+    padding: 10px;
+  }
+  
+  .left {
+    width: 80%;
+  }
+  
+  .right {
+    width: 20%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.chatme {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.chatpeer {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.container-chat {
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100vh;
+    display: flex;
+}
+
+.container-chat .chat-input {
+    justify-content: flex-end;
+    display: flex;
+    margin: 10px 0;
+}
+.top-block {
+    justify-content: flex-left;
+    display: flex;
+    margin: 10px 0;
+}
